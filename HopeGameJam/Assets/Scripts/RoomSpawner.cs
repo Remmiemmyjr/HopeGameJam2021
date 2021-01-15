@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ===============================
+// AUTHOR: Emily Berg
+// DESC: 
+// DATE MODIFIED:
+// ===============================
+
+
 public class RoomSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // A list of values that will help indicate which room a spawnpoint can spawn in, depending on its placement
+    enum ValidRoom {LEFT, RIGHT, TOP, BOTTOM};
+
     void Start()
     {
         
