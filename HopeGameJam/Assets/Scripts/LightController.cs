@@ -14,6 +14,7 @@ using System;
 public class LightController : MonoBehaviour
 {
     Light2D hopeLight;
+    const float maxRadius = 4f;
     public float r_modifier = 0.005f;
     public float i_modifier = 0.001f;
 
@@ -35,7 +36,8 @@ public class LightController : MonoBehaviour
 
     private IEnumerator DimLights()
     {
-        var radius = hopeLight.pointLightOuterRadius;
+        hopeLight.pointLightOuterRadius = maxRadius;
+        var radius = maxRadius;
         var intensity = hopeLight.intensity;
         while (intensity > 0 && radius > 0)
         {

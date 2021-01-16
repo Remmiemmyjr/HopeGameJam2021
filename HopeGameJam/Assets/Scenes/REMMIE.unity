@@ -19156,7 +19156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3612a3fc00c3ef240bf95acfeb68470a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_modifier: 0.005
+  r_modifier: 0.003
   i_modifier: 0.001
 --- !u!43 &1941047961
 Mesh:
