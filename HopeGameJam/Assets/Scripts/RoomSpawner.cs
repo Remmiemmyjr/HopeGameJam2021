@@ -4,8 +4,9 @@ using UnityEngine;
 
 // ===============================
 // AUTHOR: Emily Berg
+// OTHER EDITORS: 
 // DESC: 
-// DATE MODIFIED:
+// DATE MODIFIED: 1/15/2021
 // ===============================
 
 
