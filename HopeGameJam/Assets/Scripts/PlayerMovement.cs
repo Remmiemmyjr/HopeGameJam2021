@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ===============================
+// AUTHOR: Lucas Ferreira
+// OTHER EDITORS: 
+// DESC: 
+// DATE MODIFIED: 1/03/2021
+// ===============================
+
 public class PlayerMovement : MonoBehaviour
 {
     float speed; // Motion Speed

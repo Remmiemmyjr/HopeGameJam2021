@@ -7,6 +7,9 @@ using UnityEngine;
 // OTHER EDITORS: 
 // DESC: 
 // DATE MODIFIED: 1/15/2021
+//
+// *Derived from Blackthornprod's
+// Random Dungeon Tutorial Series*
 // ===============================
 
 

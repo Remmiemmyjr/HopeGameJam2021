@@ -4,6 +4,13 @@ using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine;
 using System;
 
+// ===============================
+// AUTHOR: Emily Berg
+// OTHER EDITORS: 
+// DESC: 
+// DATE MODIFIED: 1/16/2021
+// ===============================
+
 public class LightController : MonoBehaviour
 {
     Light2D hopeLight;
@@ -27,11 +34,14 @@ public class LightController : MonoBehaviour
     private IEnumerator DimLights()
     {
         var radius = hopeLight.pointLightOuterRadius;
-        while (radius > 0)
+        var intensity = hopeLight.intensity;
+        while (intensity > 0 && radius > 0)
         {
-            radius -= 0.1f;
+            intensity -= 0.001f;
+            radius -= 0.005f;
             hopeLight.pointLightOuterRadius = radius;
-            yield return new WaitForSeconds(0.1f);
+            hopeLight.intensity = intensity;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }

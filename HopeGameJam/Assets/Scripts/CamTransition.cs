@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ===============================
+// AUTHOR: Lucas Ferreira
+// OTHER EDITORS: 
+// DESC: 
+// DATE MODIFIED: 1/15/2021
+//
+// *Derived from BenBonks' Celeste
+// Camera Follow-Unity Cinemachine
+// Tutorial*
+// ===============================
+
 public class CamTransition : MonoBehaviour
 {
     public GameObject cam;
