@@ -14,6 +14,8 @@ using System;
 public class LightController : MonoBehaviour
 {
     Light2D hopeLight;
+    public float r_modifier = 0.005f;
+    public float i_modifier = 0.001f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +39,8 @@ public class LightController : MonoBehaviour
         var intensity = hopeLight.intensity;
         while (intensity > 0 && radius > 0)
         {
-            intensity -= 0.001f;
-            radius -= 0.005f;
+            radius -= r_modifier;
+            intensity -= i_modifier;
             hopeLight.pointLightOuterRadius = radius;
             hopeLight.intensity = intensity;
             yield return new WaitForSeconds(0.01f);
