@@ -229,6 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274569929153866648}
   - component: {fileID: 2974880938149766393}
+  - component: {fileID: 2494326862651062599}
   m_Layer: 0
   m_Name: Player Light
   m_TagString: Untagged
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 4
+  m_PointLightOuterRadius: 3.5
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -291,3 +292,16 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2494326862651062599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548698649717911205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3612a3fc00c3ef240bf95acfeb68470a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_modifier: 0.003

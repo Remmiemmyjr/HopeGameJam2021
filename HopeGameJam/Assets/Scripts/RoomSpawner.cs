@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +16,10 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    // A list of values that will help indicate which room a spawnpoint can spawn in, depending on its placement
-    enum ValidRoom {LEFT, RIGHT, TOP, BOTTOM};
+    // 
+    [Flags] public enum ValidRoom {LEFT = 1, RIGHT = 2, TOP = 4, BOTTOM = 8};
+
+    public ValidRoom needsRoomOfType;
 
     void Start()
     {

@@ -4,26 +4,30 @@ using UnityEngine;
 
 // ===============================
 // AUTHOR: Weak Baby Man
-// OTHER EDITORS:
+// OTHER EDITORS: Emily Berg
 // DESC:
 // DATE MODIFIED: 1/16/2021
 // ===============================
 
 public class HopeController : MonoBehaviour
 {
-    LightController light;
+    LightController lightController;
+
     // help
     void Start()
     {
-        light = LightController.GetComponent<LightController>();
+        //Locating the first object tagged as "Player" in the scene
+        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        //Finding the child on player that has the script LightController so we arent checking every single child object
+        lightController = player.transform.GetComponentInChildren<LightController>();
     }
     // dont cri dont cri dont cri dont cri dont criiiiiiiiiiiiiiiiii
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameobject.tag == "Player")
+        if(collision.gameObject.tag == "Player")
         {
-            light.StartCoroutine(DimLights);
-            this.GameObject.SetActive(False);
+            //Debug.Log("Collided");
+            StartCoroutine(lightController.DimLights());
         }
     }
 }

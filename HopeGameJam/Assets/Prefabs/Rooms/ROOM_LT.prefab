@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a049815b45ef04e90cba1a43696513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needsRoomOfType: 0
 --- !u!1 &4753851802566054562
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a049815b45ef04e90cba1a43696513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needsRoomOfType: 0
 --- !u!1 &4753851803580624728
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4753851803580624729}
+  - component: {fileID: -227882316208906924}
   m_Layer: 0
   m_Name: ROOM_LT
   m_TagString: Untagged
@@ -218,6 +221,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-227882316208906924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753851803580624728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a049815b45ef04e90cba1a43696513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  needsRoomOfType: 10
 --- !u!1 &4753851803863887973
 GameObject:
   m_ObjectHideFlags: 0
