@@ -20,7 +20,7 @@ public class RoomSpawner : MonoBehaviour
 
     RoomTypeList template;
 
-    const int roomSize = 10;
+    const int roomSize = 6;
 
     private int random;
 
@@ -42,7 +42,7 @@ public class RoomSpawner : MonoBehaviour
         template = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTypeList>();
 
         // Allows us to call a method with a delay. Collision would not be detected properly if spawned at the same time.
-        Invoke("SpawnRooms", 1f);
+        Invoke("SpawnRooms", 0.1f);
     }
     
     bool CanSpawn(int x, int y)
@@ -117,7 +117,8 @@ public class RoomSpawner : MonoBehaviour
 
     void PlaceRoom(int xMap, int yMap, GameObject room)
     {
-        Debug.Log($"Place Room: {xMap}, {yMap}");
+        //Debug.Log($"Place Room: {xMap}, {yMap}");
+
         // stored the room passed in within our array
         roomMap[xMap, yMap] = room;
         RoomSpawner spawner = room.GetComponent<RoomSpawner>();
