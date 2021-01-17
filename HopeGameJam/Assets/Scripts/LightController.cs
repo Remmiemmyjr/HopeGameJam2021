@@ -23,7 +23,7 @@ public class LightController : MonoBehaviour
         hopeLight = gameObject.GetComponent<Light2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // Debugger
         if(Input.GetKey(KeyCode.F))

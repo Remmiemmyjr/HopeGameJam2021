@@ -16,12 +16,12 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    // 
+    // words 
     [Flags] public enum ValidRoom {LEFT = 1, RIGHT = 2, TOP = 4, BOTTOM = 8};
 
     public ValidRoom needsRoomOfType;
 
-    void Start()
+    private void Start()
     {
         
     }
@@ -29,6 +29,20 @@ public class RoomSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        switch (needsRoomOfType)
+        {
+            case ValidRoom.LEFT:
+                // needs to spawn a room of type LEFT Entrance
+                break;
+            case ValidRoom.RIGHT:
+                // needs to spawn a room of type RIGHT Entrance
+                break;
+            case ValidRoom.TOP:
+                // needs to spawn a room of type TOP entrance
+                break;
+            case ValidRoom.BOTTOM:
+                // needs to spawn a room of type BOTTOM entrance
+                break;
+        }
     }
 }
