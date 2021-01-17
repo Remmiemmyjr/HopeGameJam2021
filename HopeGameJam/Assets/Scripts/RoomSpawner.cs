@@ -30,9 +30,13 @@ public class RoomSpawner : MonoBehaviour
 
     static GameObject[,] roomMap = new GameObject[roomSize, roomSize];
 
+    public GameObject exitObj;
+
     static Vector3 heightOffset = new Vector2(0, 10);
 
     static Vector3 widthOffset = new Vector2(10, 0);
+
+    static Vector3 zOffset = new Vector3(0, 0, 1);
     
     private bool spawned = false;
 
@@ -78,6 +82,9 @@ public class RoomSpawner : MonoBehaviour
                 yMap = roomSize / 2;
                 // adding this to the array
                 PlaceRoom(xMap, yMap, this.gameObject);
+
+                // This logic only gets called once, and we only want this exit room method called once.
+                Invoke("SetExitRoom", 1.5f);
             }
 
             // Check if theres anything to the right, to spawn "lefts". Added one to check the next spot in the array
@@ -113,6 +120,8 @@ public class RoomSpawner : MonoBehaviour
             }
             spawned = true;
         }
+
+        template.roomList.Add(this.gameObject);
     }
 
     void PlaceRoom(int xMap, int yMap, GameObject room)
@@ -125,5 +134,12 @@ public class RoomSpawner : MonoBehaviour
         // telling the room where its at (re-setting -1)
         spawner.xMap = xMap;
         spawner.yMap = yMap;
+    }
+
+    void SetExitRoom()
+    {
+        // Gets the last room spawned in, so we can turn it into an exit room
+        GameObject exitRoom = template.roomList[template.roomList.Count - 1];
+        Instantiate(exitObj, exitRoom.transform.position + zOffset, Quaternion.identity);
     }
 }

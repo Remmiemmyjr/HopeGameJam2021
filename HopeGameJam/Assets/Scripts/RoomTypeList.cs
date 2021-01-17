@@ -9,4 +9,6 @@ public class RoomTypeList : MonoBehaviour
     public GameObject[] RightRooms;
     public GameObject[] TopRooms;
     public GameObject[] BottomRooms;
+
+    public List<GameObject> roomList;
 }
