@@ -5,8 +5,8 @@ using UnityEngine;
 public class RoomTypeList : MonoBehaviour
 {
     // public game object lists to store each type of room that have the specified entrances
-    public GameObject[] typeLeftRooms;
-    public GameObject[] typeRightRooms;
-    public GameObject[] typeTopRooms;
-    public GameObject[] typeBottomRooms;
+    public GameObject[] LeftRooms;
+    public GameObject[] RightRooms;
+    public GameObject[] TopRooms;
+    public GameObject[] BottomRooms;
 }

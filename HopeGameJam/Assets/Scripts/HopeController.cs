@@ -17,9 +17,9 @@ public class HopeController : MonoBehaviour
     void Start()
     {
         //Locating the first object tagged as "Player" in the scene
-        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        //GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
         //Finding the child on player that has the script LightController so we arent checking every single child object
-        lightController = player.transform.GetComponentInChildren<LightController>();
+        lightController = GameObject.FindGameObjectWithTag("Player").transform.GetComponentInChildren<LightController>();
     }
     // dont cri dont cri dont cri dont cri dont criiiiiiiiiiiiiiiiii
     private void OnTriggerEnter2D(Collider2D collision)
