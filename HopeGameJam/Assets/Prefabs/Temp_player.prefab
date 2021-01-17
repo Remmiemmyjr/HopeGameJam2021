@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 9142642204217297708}
   - component: {fileID: 5712909907908399762}
   m_Layer: 0
-  m_Name: Global Light 2D
+  m_Name: Global Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 1274569929153866648}
   - component: {fileID: 2974880938149766393}
   m_Layer: 0
-  m_Name: Point Light 2D
+  m_Name: Player Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -16,7 +16,7 @@ public class LightController : MonoBehaviour
     Light2D hopeLight;
     const float maxRadius = 4f;
     public float r_modifier = 0.005f;
-    public float i_modifier = 0.001f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,13 +38,10 @@ public class LightController : MonoBehaviour
     {
         hopeLight.pointLightOuterRadius = maxRadius;
         var radius = maxRadius;
-        var intensity = hopeLight.intensity;
-        while (intensity > 0 && radius > 0)
+        while (radius > 0)
         {
             radius -= r_modifier;
-            intensity -= i_modifier;
             hopeLight.pointLightOuterRadius = radius;
-            hopeLight.intensity = intensity;
             yield return new WaitForSeconds(0.01f);
         }
     }
