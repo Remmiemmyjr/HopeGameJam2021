@@ -7,29 +7,30 @@ using UnityEngine;
 // AUTHOR: Emily Berg
 // OTHER EDITORS: 
 // DESC: 
-// DATE MODIFIED: 1/15/2021
-//
+// DATE MODIFIED: 1/20/2021
 // ===============================
 
 
 public class RoomSpawner : MonoBehaviour
 {
-    [Flags] public enum OpeningSide {LEFT = 1, RIGHT = 2, TOP = 4, BOTTOM = 8};
+    [Flags] public enum OpeningSide {NONE = 0, LEFT = 1, RIGHT = 2, TOP = 4, BOTTOM = 8};
 
     public OpeningSide typeOfRoom;
 
     RoomTypeList template;
 
-    const int roomSize = 6;
+    public int spawnBounds = 6;
 
     private int random;
 
     int xMap = -1;
 
     int yMap = -1;
+    
+    static int roomMapSize;
 
-    static GameObject[,] roomMap = new GameObject[roomSize, roomSize];
-
+    static GameObject[,] roomMap;
+    
     public GameObject exitObj;
 
     static Vector3 heightOffset = new Vector2(0, 10);
@@ -52,7 +53,7 @@ public class RoomSpawner : MonoBehaviour
     bool CanSpawn(int x, int y)
     {
         // If rooms spawns out of bounds
-        if (x < 0 || y < 0 || x >= roomSize || y >= roomSize)
+        if (x < 0 || y < 0 || x >= roomMapSize || y >= roomMapSize)
         {
             return false;
         }
@@ -67,6 +68,74 @@ public class RoomSpawner : MonoBehaviour
         return true;
     }
 
+    private void SpawnARoomIfNeeded(int xDirection, int yDirection, OpeningSide thisOpening, OpeningSide otherOpening, GameObject[] potentialRooms)
+    {
+        if (typeOfRoom.HasFlag(thisOpening) && CanSpawn(xMap + xDirection, yMap + yDirection))
+        {
+            List<GameObject> matchingRooms = new List<GameObject>(potentialRooms.Length);
+
+            foreach(GameObject room in potentialRooms)
+            {
+                if (canPlace(xMap + xDirection, yMap + yDirection, room))
+                {
+                    matchingRooms.Add(room);
+                }
+            }
+
+            random = UnityEngine.Random.Range(0, matchingRooms.Count);
+            PlaceRoom(xMap + xDirection, yMap + yDirection, Instantiate(matchingRooms[random],
+                transform.position + xDirection * widthOffset + yDirection * heightOffset,
+                Quaternion.identity));
+        }
+    }
+
+    private bool canPlace(int x, int y, GameObject room)
+    {
+        RoomSpawner rS = room.GetComponent<RoomSpawner>();
+
+        bool isOk =
+        IsWallMatch(x - 1, y, rS.typeOfRoom & OpeningSide.LEFT, OpeningSide.RIGHT) &&
+        IsWallMatch(x + 1, y, rS.typeOfRoom & OpeningSide.RIGHT, OpeningSide.LEFT) &&
+        IsWallMatch(x, y + 1, rS.typeOfRoom & OpeningSide.TOP, OpeningSide.BOTTOM) &&
+        IsWallMatch(x, y - 1, rS.typeOfRoom & OpeningSide.BOTTOM, OpeningSide.TOP);
+        return isOk;
+    }
+
+    private bool IsWallMatch(int x, int y, OpeningSide openingSide, OpeningSide openingSideMask)
+    {
+        bool looking4Wall = openingSide == OpeningSide.NONE;
+
+        if (x < 0 || y < 0 || x >= roomMapSize || y >= roomMapSize)
+        {
+            // There's no rooms outside the boundary, so the room that called this is 
+            // up against a boundary, so we only match a "wall" room
+            return looking4Wall;
+        }
+        else
+        {
+            if (roomMap[x, y] == null)
+            {
+                // No room next to this wall so we can match anything
+                return true;
+            }
+
+            // Need to figure out what wall this room has so we can match it
+            RoomSpawner rS = roomMap[x, y].GetComponent<RoomSpawner>();
+            var temp = rS.typeOfRoom & openingSideMask;
+
+            if (looking4Wall)
+            {
+                // Looking for a wall 
+                return temp == OpeningSide.NONE;
+            }
+            else
+            {
+                // Looking for a door
+                return temp != OpeningSide.NONE;
+            }
+        }
+    }
+
     void SpawnRooms()
     {
         //Debug.Log($"Spawning... {spawned}, {typeOfRoom}");
@@ -77,9 +146,12 @@ public class RoomSpawner : MonoBehaviour
             // Identifying the first room with this script (the entry room, already placed)
             if (xMap == -1 || yMap == -1)
             {
+                // Spawn bound only exists on the first room since its a member var, we need to copy it into a static
+                roomMap = new GameObject[spawnBounds, spawnBounds];
+                roomMapSize = spawnBounds;
                 // This room goes in the middle of the map 
-                xMap = roomSize / 2;
-                yMap = roomSize / 2;
+                xMap = spawnBounds / 2;
+                yMap = spawnBounds / 2;
                 // adding this to the array
                 PlaceRoom(xMap, yMap, this.gameObject);
 
@@ -87,43 +159,18 @@ public class RoomSpawner : MonoBehaviour
                 Invoke("SetExitRoom", 1.5f);
             }
 
-            // Check if theres anything to the right, to spawn "lefts". Added one to check the next spot in the array
-            if (typeOfRoom.HasFlag(OpeningSide.LEFT) && CanSpawn(xMap - 1, yMap))
-            {
-                // needs to spawn a room of type Right Entrance
-                random = UnityEngine.Random.Range(0, template.RightRooms.Length);
-                PlaceRoom(xMap - 1, yMap, Instantiate(template.RightRooms[random], transform.position - widthOffset, Quaternion.identity));
-            }
-
-            // Check if theres anything to the left, to spawn "rights". Subtract one to check the next prev in the array
-            if (typeOfRoom.HasFlag(OpeningSide.RIGHT) && CanSpawn(xMap + 1, yMap))
-            {
-                // needs to spawn a room of type RIGHT Entrance
-                random = UnityEngine.Random.Range(0, template.LeftRooms.Length);
-                PlaceRoom(xMap + 1, yMap, Instantiate(template.LeftRooms[random], transform.position + widthOffset, Quaternion.identity));
-            }
-
-            // Check if theres anything below, to spawn "tops". Subtract one to check the next prev in the array
-            if (typeOfRoom.HasFlag(OpeningSide.TOP) && CanSpawn(xMap, yMap + 1))
-            {
-                // needs to spawn a room of type TOP entrance
-                random = UnityEngine.Random.Range(0, template.BottomRooms.Length);
-                PlaceRoom(xMap, yMap + 1, Instantiate(template.BottomRooms[random], transform.position + heightOffset, Quaternion.identity));
-            }
-
-            // Check if theres anything above, to spawn "bottoms". Add one to check the next prev in the array
-            if (typeOfRoom.HasFlag(OpeningSide.BOTTOM) && CanSpawn(xMap, yMap - 1))
-            {
-                // needs to spawn a room of type BOTTOM entrance
-                random = UnityEngine.Random.Range(0, template.TopRooms.Length);
-                PlaceRoom(xMap, yMap - 1, Instantiate(template.TopRooms[random], transform.position - heightOffset, Quaternion.identity));
-            }
+            SpawnARoomIfNeeded(-1, 0, OpeningSide.LEFT, OpeningSide.RIGHT, template.RightRooms);
+            SpawnARoomIfNeeded(+1, 0, OpeningSide.RIGHT, OpeningSide.LEFT, template.LeftRooms);
+            SpawnARoomIfNeeded(0, +1, OpeningSide.TOP, OpeningSide.BOTTOM, template.BottomRooms);
+            SpawnARoomIfNeeded(0, -1, OpeningSide.BOTTOM, OpeningSide.TOP, template.TopRooms);
+            
             spawned = true;
+
         }
 
         template.roomList.Add(this.gameObject);
     }
-
+    
     void PlaceRoom(int xMap, int yMap, GameObject room)
     {
         //Debug.Log($"Place Room: {xMap}, {yMap}");
