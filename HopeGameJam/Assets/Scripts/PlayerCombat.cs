@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +13,31 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    Vector3 mousePos;
+    Vector3 hitPoint;
+    public float radius = 0.1f;
+    public float rangeScalar = 0.5f;
+    public LayerMask Enemy;
+
     private void Update()
     {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = transform.position.z;
+
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            worldPos.z = transform.position.z;
-            Debug.Log($"{worldPos.z}");
+            Attack();
         }
+
+    }
+    void Attack()
+    {
+        hitPoint = mousePos - gameObject.transform.position;
+        Collider2D hitCollider = Physics2D.OverlapCircle(hitPoint.normalized * rangeScalar, radius, Enemy);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(hitPoint.normalized * rangeScalar, radius);
     }
 }
