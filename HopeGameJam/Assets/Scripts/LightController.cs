@@ -11,6 +11,7 @@ using System;
 // DATE MODIFIED: 1/16/2021
 // ===============================
 
+
 public class LightController : MonoBehaviour
 {
     Light2D hopeLight;

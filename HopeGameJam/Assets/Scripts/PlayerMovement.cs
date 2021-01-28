@@ -18,23 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetKey(KeyCode.W)) // Move Up
-        {
-            movement.y += 1;
-        }
-        if (Input.GetKey(KeyCode.S)) // Move Down
-        {
-            movement.y -= 1;
-        }
-        if (Input.GetKey(KeyCode.D)) // Move Right
-        {
-            movement.x += 1;
-        }
-        if (Input.GetKey(KeyCode.A)) // Move Left
-        {
-            movement.x -= 1;
-        }*/
-
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -47,10 +30,11 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = walk;
         }
+        
+        GetComponent<Rigidbody2D>().velocity = movement.normalized * speed;
     }
 
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + movement * speed * Time.fixedDeltaTime);
     }
 }

@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ===============================
+// AUTHOR: Emily Berg
+// OTHER EDITORS: 
+// DESC: 
+// DATE MODIFIED: 1/20/2021
+// ===============================
+
+
 public class RoomTypeList : MonoBehaviour
 {
     // public game object lists to store each type of room that have the specified entrances

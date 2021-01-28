@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // ===============================
-// AUTHOR: Weak Baby Man
+// AUTHOR: Lucas Ferreira
 // OTHER EDITORS: Emily Berg
 // DESC:
 // DATE MODIFIED: 1/16/2021
 // ===============================
+
 
 public class HopeController : MonoBehaviour
 {
