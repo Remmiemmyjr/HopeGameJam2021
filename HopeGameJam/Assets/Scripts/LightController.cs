@@ -7,17 +7,23 @@ using System;
 // ===============================
 // AUTHOR: Emily Berg
 // OTHER EDITORS: Lucas Ferreira
-// DESC: 
+// DESC: Controls the lights
+// dimming behavior 
 // DATE MODIFIED: 1/16/2021
 // ===============================
 
 
 public class LightController : MonoBehaviour
 {
+
     Light2D hopeLight;
+
     const float maxRadius = 3.5f;
-    float currRadius = maxRadius; 
+
     public float r_modifier = 0.005f;
+
+    float currRadius = maxRadius; 
+
     
     void Start()
     {

@@ -4,37 +4,23 @@ using UnityEngine;
 
 // ===============================
 // AUTHOR: Lucas Ferreira
-// OTHER EDITORS: 
-// DESC: 
-// DATE MODIFIED: 1/03/2021
+// OTHER EDITORS: Emily Berg
+// DESC: Simple top down movement
+// controller for the player
+// DATE MODIFIED: 1/23/2021
 // ===============================
 
 public class PlayerMovement : MonoBehaviour
 {
-    float speed; // Motion Speed
-    public float walk = 5f; // Walk Speed
-    public float sprint = 8f; // Sprint Speed
+    float speed = 5f; 
+
     Vector2 movement = new Vector2();
 
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        //Sprint
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = sprint;
-        }
-        else
-        {
-            speed = walk;
-        }
         
         GetComponent<Rigidbody2D>().velocity = movement.normalized * speed;
-    }
-
-    void FixedUpdate()
-    {
     }
 }

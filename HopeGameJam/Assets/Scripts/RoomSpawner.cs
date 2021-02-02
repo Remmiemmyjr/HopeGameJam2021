@@ -6,28 +6,35 @@ using UnityEngine;
 // ===============================
 // AUTHOR: Emily Berg
 // OTHER EDITORS: 
-// DESC: 
-// DATE MODIFIED: 1/20/2021
+// DESC: Spawns rooms from an origin
+// within specified map boundaries,
+// indentifies which rooms are
+// appropriate to instantiate and
+// connect to other rooms.
+// DATE MODIFIED: 2/1/2021
 // ===============================
 
 
 public class RoomSpawner : MonoBehaviour
 {
+
     [Flags] public enum OpeningSide {NONE = 0, LEFT = 1, RIGHT = 2, TOP = 4, BOTTOM = 8};
 
     public OpeningSide typeOfRoom;
 
     RoomTypeList template;
 
+    private bool spawned = false;
+
     public int spawnBounds = 6;
 
     private int random;
 
+    static int roomMapSize;
+
     int xMap = -1;
 
     int yMap = -1;
-    
-    static int roomMapSize;
 
     static GameObject[,] roomMap;
     
@@ -38,8 +45,6 @@ public class RoomSpawner : MonoBehaviour
     static Vector3 widthOffset = new Vector2(10, 0);
 
     static Vector3 zOffset = new Vector3(0, 0, 1);
-    
-    private bool spawned = false;
 
 
     private void Start()

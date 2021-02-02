@@ -5,7 +5,8 @@ using UnityEngine;
 // ===============================
 // AUTHOR: Lucas Ferreira
 // OTHER EDITORS: 
-// DESC: 
+// DESC: Boundary/move logic for the
+// main camera
 // DATE MODIFIED: 1/15/2021
 //
 // *Derived from BenBonks' Celeste
@@ -16,6 +17,7 @@ using UnityEngine;
 
 public class CamTransition : MonoBehaviour
 {
+
     public GameObject cam;
 
     //Switch when entering room

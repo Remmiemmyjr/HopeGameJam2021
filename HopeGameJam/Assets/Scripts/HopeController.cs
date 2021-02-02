@@ -5,13 +5,15 @@ using UnityEngine;
 // ===============================
 // AUTHOR: Lucas Ferreira
 // OTHER EDITORS: Emily Berg
-// DESC:
+// DESC: A trigger that will activiate
+// a method to reset light raidus
 // DATE MODIFIED: 1/16/2021
 // ===============================
 
 
 public class HopeController : MonoBehaviour
 {
+
     LightController lightController;
 
     // help
